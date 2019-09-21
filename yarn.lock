@@ -24,10 +24,10 @@ eslint-config-prettier@^3.3.0:
   dependencies:
     get-stdin "^6.0.0"
 
-framework7@^4.4.10:
-  version "4.4.10"
-  resolved "https://registry.yarnpkg.com/framework7/-/framework7-4.4.10.tgz#881ac203ba6ac0616d62dbef8f3d4ab8241fceee"
-  integrity sha512-9dTanW9lWdYel2letnHS+1VQ/h/xyHi+F6FYWZXRNIIizT18EXshZOQcL5hS6LkzIIb5E+s+rPiu5sIO7g6LBg==
+framework7@^4.5.1:
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/framework7/-/framework7-4.5.1.tgz#2811477f2ebaec4eeabbfe8f3856e2bbf9d4541e"
+  integrity sha512-LqSSY6+MFL82fqOPrLiKToZOOZ5VXZnh2JG1xy2Y2h3WLfgA8ozokJJFGaaPjpWjwDF3LxeGcxgZ61skoOK2BQ==
   dependencies:
     dom7 "^2.1.3"
     path-to-regexp "^3.0.0"
