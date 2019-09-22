@@ -2,7 +2,7 @@ import Template7 from 'template7'
 import $ from 'dom7'
 
 // F7 Class
-import Framework7 from 'framework7/components/app/app-class'
+import Framework7 from './app-class'
 
 // Import Helpers
 import Request from 'framework7/utils/request'

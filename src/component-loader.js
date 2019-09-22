@@ -1,6 +1,8 @@
 import Utils from 'framework7/utils/utils'
 import WCFramework7Component from './component-class'
 
+const resolved = Promise.resolve()
+
 export default {
   name: 'routerComponentLoader',
   proto: {
@@ -30,7 +32,17 @@ export default {
         },
       })
       const createdComponent = new WCFramework7Component(app, component, {}, extendContext)
-      resolve(createdComponent.el)
+      const el = createdComponent.el
+      resolve(el)
+
+      if (app.wcPageInitCallbacks) {
+        const renderPromise = el.updateComplete || resolved
+        renderPromise.then(() => {
+          app.wcPageInitCallbacks.forEach(callback => {
+            callback.call(app, el.f7Page)
+          })
+        })
+      }
     },
 
     modalComponentLoader(rootEl, component, componentUrl, options, resolve, reject) {
