@@ -8,9 +8,6 @@ const app = new Framework7({
     {
       path: '/my-page/level/:level',
       component: IndexPage,
-      context: function() {
-        return { x: 'y' }
-      },
     },
   ],
 })
