@@ -13,8 +13,28 @@ class WCFramework7Component {
     })
     const { $options } = self
 
+    if ($options.data) {
+      $options.data = $options.data.bind(self)
+      // Data
+      Utils.extend(self, $options.data())
+    }
+    if ($options.render) $options.render = $options.render.bind(self)
+    if ($options.methods) {
+      Object.keys($options.methods).forEach(methodName => {
+        self[methodName] = $options.methods[methodName].bind(self)
+      })
+    }
+
+    self.el = typeof component === 'string' ? document.createElement(component) : new component()
+    self.el.classList.add('page')
+    Object.assign(self.el, extendContext, {
+      $app: app,
+      $f7: app,
+      $id: options.id || id,
+    })
+
     // Root data and methods
-    Object.defineProperty(self, '$root', {
+    Object.defineProperty(self.el, '$root', {
       enumerable: true,
       configurable: true,
       get() {
@@ -36,25 +56,6 @@ class WCFramework7Component {
         return root
       },
       set() {},
-    })
-
-    if ($options.data) {
-      $options.data = $options.data.bind(self)
-      // Data
-      Utils.extend(self, $options.data())
-    }
-    if ($options.render) $options.render = $options.render.bind(self)
-    if ($options.methods) {
-      Object.keys($options.methods).forEach(methodName => {
-        self[methodName] = $options.methods[methodName].bind(self)
-      })
-    }
-
-    self.el = typeof component === 'string' ? document.createElement(component) : new component()
-    self.el.classList.add('page')
-    Object.assign(self.el, extendContext, {
-      $f7: app,
-      $id: options.id || id,
     })
 
     // Bind Events
