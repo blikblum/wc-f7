@@ -1,7 +1,7 @@
 import $ from 'dom7'
 
 // F7 Class
-import Framework7 from './app-class'
+import Framework7 from './src/app-class'
 
 // Import Helpers
 import Request from 'framework7/utils/request'
@@ -33,7 +33,7 @@ import TouchRipple from 'framework7/components/touch-ripple/touch-ripple'
 import Modal from 'framework7/components/modal/modal'
 import Router from 'framework7/modules/router/router-class'
 
-import RouterComponentLoaderModule from './component-loader'
+import RouterComponentLoaderModule from './src/component-loader'
 
 if ('es' !== 'es') {
   if (typeof window !== 'undefined') {

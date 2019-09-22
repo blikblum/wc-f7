@@ -2,7 +2,7 @@
   "name": "wc-f7",
   "version": "0.3.1",
   "description": "Framework7 Web Component adapter",
-  "main": "src/wc-f7.js",
+  "main": "wc-f7.js",
   "repository": "https://github.com/blikblum/wc-f7.git",
   "author": "Luiz Américo <luizamericop@gmail.com>",
   "license": "MIT",
