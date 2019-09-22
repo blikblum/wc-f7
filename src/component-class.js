@@ -50,26 +50,28 @@ class WCFramework7Component {
       })
     }
 
-    // Bind Events
-    if ($options.on) {
-      Object.keys($options.on).forEach(eventName => {
-        $options.on[eventName] = $options.on[eventName].bind(self)
-      })
-    }
-    if ($options.once) {
-      Object.keys($options.once).forEach(eventName => {
-        $options.once[eventName] = $options.once[eventName].bind(self)
-      })
-    }
-
     self.el = typeof component === 'string' ? document.createElement(component) : new component()
-
     self.el.classList.add('page')
-
     Object.assign(self.el, extendContext, {
       $f7: app,
       $id: options.id || id,
     })
+
+    // Bind Events
+    self.$on = self.el.constructor.$on
+    self.$once = self.el.constructor.$once
+    if (self.$on) {
+      self.$on = Object.assign({}, self.$on)
+      Object.keys(self.$on).forEach(eventName => {
+        self.$on[eventName] = self.$on[eventName].bind(self.el)
+      })
+    }
+    if (self.$once) {
+      self.$on = Object.assign({}, self.$on)
+      Object.keys(self.$once).forEach(eventName => {
+        self.$once[eventName] = self.$once[eventName].bind(self.el)
+      })
+    }
 
     self.$el = $(self.el)
 
@@ -86,15 +88,15 @@ class WCFramework7Component {
 
   $attachEvents() {
     const self = this
-    const { $options, $el } = self
-    if ($options.on) {
-      Object.keys($options.on).forEach(eventName => {
-        $el.on(Utils.eventNameToColonCase(eventName), $options.on[eventName])
+    const { $el } = self
+    if (self.$on) {
+      Object.keys(self.$on).forEach(eventName => {
+        $el.on(Utils.eventNameToColonCase(eventName), self.$on[eventName])
       })
     }
-    if ($options.once) {
-      Object.keys($options.once).forEach(eventName => {
-        $el.once(Utils.eventNameToColonCase(eventName), $options.once[eventName])
+    if (self.$once) {
+      Object.keys(self.$once).forEach(eventName => {
+        $el.once(Utils.eventNameToColonCase(eventName), self.$once[eventName])
       })
     }
   }
@@ -102,14 +104,14 @@ class WCFramework7Component {
   $detachEvents() {
     const self = this
     const { $options, $el } = self
-    if ($options.on) {
-      Object.keys($options.on).forEach(eventName => {
-        $el.off(Utils.eventNameToColonCase(eventName), $options.on[eventName])
+    if (self.$on) {
+      Object.keys(self.$on).forEach(eventName => {
+        $el.off(Utils.eventNameToColonCase(eventName), self.$on[eventName])
       })
     }
-    if ($options.once) {
-      Object.keys($options.once).forEach(eventName => {
-        $el.off(Utils.eventNameToColonCase(eventName), $options.once[eventName])
+    if (self.$once) {
+      Object.keys(self.$once).forEach(eventName => {
+        $el.off(Utils.eventNameToColonCase(eventName), self.$once[eventName])
       })
     }
   }
