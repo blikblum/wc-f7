@@ -38,13 +38,6 @@ class WCFramework7Component {
       set() {},
     })
 
-    // Apply context
-    'beforeCreate created beforeMount mounted beforeDestroy destroyed updated'
-      .split(' ')
-      .forEach(cycleKey => {
-        if ($options[cycleKey]) $options[cycleKey] = $options[cycleKey].bind(self)
-      })
-
     if ($options.data) {
       $options.data = $options.data.bind(self)
       // Data
@@ -69,12 +62,6 @@ class WCFramework7Component {
       })
     }
 
-    // Before create hook
-    if ($options.beforeCreate) $options.beforeCreate()
-
-    // Render
-    // let html = self.$render()
-
     self.el = typeof component === 'string' ? document.createElement(component) : new component()
 
     self.el.classList.add('page')
@@ -88,11 +75,11 @@ class WCFramework7Component {
 
     self.$attachEvents()
 
-    // Created callback
-    if ($options.created) $options.created()
-
     // Store component instance
     self.el.f7Component = self
+
+    // Created callback
+    if (self.el.$created) self.el.$created()
 
     return self
   }
@@ -127,49 +114,24 @@ class WCFramework7Component {
     }
   }
 
-  $render() {
-    const self = this
-    const { $options } = self
-    let html = ''
-    if ($options.render) {
-      html = $options.render()
-    }
-    return html
-  }
-
-  $forceUpdate() {
-    const self = this
-    let html = self.$render()
-  }
-
-  $setState(mergeState) {
-    const self = this
-    Utils.merge(self, mergeState)
-    self.$forceUpdate()
-  }
-
   $mount(mountMethod) {
     const self = this
-    if (self.$options.beforeMount) self.$options.beforeMount()
+    if (self.el.$beforeMount) self.el.$beforeMount()
     if (self.$styleEl) $('head').append(self.$styleEl)
     if (mountMethod) mountMethod(self.el)
-    if (self.$options.mounted) self.$options.mounted()
+    if (self.el.$mounted) self.el.$mounted()
   }
 
   $destroy() {
     const self = this
-    if (self.$options.beforeDestroy) self.$options.beforeDestroy()
+    if (self.el.$beforeDestroy) self.el.$beforeDestroy()
     if (self.$styleEl) $(self.$styleEl).remove()
     self.$detachEvents()
-    if (self.$options.destroyed) self.$options.destroyed()
+    if (self.el.$destroyed) self.el.$destroyed()
     // Delete component instance
     if (self.el && self.el.f7Component) {
       self.el.f7Component = null
       delete self.el.f7Component
-    }
-    // Patch with empty node
-    if (self.$vnode) {
-      self.$vnode = patch(self.$vnode, { sel: self.$vnode.sel, data: {} })
     }
     Utils.deleteProps(self)
   }
