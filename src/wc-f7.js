@@ -1,4 +1,3 @@
-import Template7 from 'template7'
 import $ from 'dom7'
 
 // F7 Class
@@ -38,9 +37,6 @@ import RouterComponentLoaderModule from './component-loader'
 
 if ('es' !== 'es') {
   if (typeof window !== 'undefined') {
-    // Template7
-    if (!window.Template7) window.Template7 = Template7
-
     // Dom7
     if (!window.Dom7) window.Dom7 = $
   }
@@ -71,5 +67,5 @@ Framework7.use([
   Modal,
 ])
 
-export { Template7, $ as Dom7, Request, Utils, Device, Support }
+export { $ as Dom7, Request, Utils, Device, Support }
 export default Framework7
