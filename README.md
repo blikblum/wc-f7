@@ -12,6 +12,7 @@ wc-f7 extends Framework7 core modules replacing the router component loader with
  - Supports async rendering (e.g. [LitElement](https://lit-element.polymer-project.org/) / [SkateJS](https://github.com/skatejs/skatejs))
  - Bundle size smaller than Framework7 core
  - Supports component lifecycle hooks and page events
+ - No hard dependency on a specific Framework7 version (any v4 version should work)
 
 
 ### Caveats
