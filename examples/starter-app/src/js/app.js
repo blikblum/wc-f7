@@ -1,11 +1,5 @@
 import $$ from 'dom7'
-import Framework7 from 'wc-f7'
-
-import Dialog from 'framework7/components/dialog/dialog'
-import Login from 'framework7/components/login-screen/login-screen'
-import Panel from 'framework7/components/panel/panel'
-import Popup from 'framework7/components/popup/popup'
-import Preloader from 'framework7/components/preloader/preloader'
+import Framework7 from 'wc-f7/bundle'
 
 // Import F7 Styles
 import 'framework7/css/framework7.bundle.css'
@@ -16,8 +10,6 @@ import '../css/app.css'
 
 // Import Routes
 import routes from './routes.js'
-
-Framework7.use([Dialog, Login, Panel, Popup, Preloader])
 
 var app = new Framework7({
   root: '#app', // App root element

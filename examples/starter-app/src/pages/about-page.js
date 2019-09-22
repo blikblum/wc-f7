@@ -1,12 +1,12 @@
 import { LitElement, html } from 'lit-element'
 
 export class AboutPage extends LitElement {
-  createRenderRoot() {
-    return this
+  static get pageName() {
+    return 'about'
   }
 
-  $created() {
-    this.dataset.name = 'about'
+  createRenderRoot() {
+    return this
   }
 
   render() {

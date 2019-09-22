@@ -111,6 +111,9 @@ export class HomePage extends LitElement {
             <li>
               <a href="/request-and-load/user/123456/">Request Data & Load</a>
             </li>
+            <li>
+              <a href="/auto-init/">Auto Init Components</a>
+            </li>
           </ul>
         </div>
       </div>

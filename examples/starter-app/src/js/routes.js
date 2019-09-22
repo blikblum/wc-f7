@@ -6,6 +6,7 @@ import { RequestAndLoad } from '../pages/request-and-load-page'
 // use tag name as component
 import '../pages/form-page'
 import '../pages/about-page'
+import '../pages/auto-init-page'
 
 var routes = [
   {
@@ -20,7 +21,10 @@ var routes = [
     path: '/form/',
     component: 'form-page',
   },
-
+  {
+    path: '/auto-init/',
+    component: 'auto-init-page',
+  },
   {
     path: '/dynamic-route/blog/:blogId/post/:postId/',
     component: DynamicPage,
