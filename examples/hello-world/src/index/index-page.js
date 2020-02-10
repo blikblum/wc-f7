@@ -65,6 +65,7 @@ export class IndexPage extends LitElement {
     const message = level ? 'Hello Again' : 'Hello World!'
     return html`
       <div class="navbar">
+        <div class="navbar-bg"></div>
         <div class="navbar-inner">
           ${level
             ? html`

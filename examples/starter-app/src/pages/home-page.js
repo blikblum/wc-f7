@@ -13,6 +13,7 @@ export class HomePage extends LitElement {
     return html`
       <!-- Top Navbar -->
       <div class="navbar">
+        <div class="navbar-bg"></div>
         <div class="navbar-inner">
           <div class="left">
             <a href="#" class="link icon-only panel-open" data-panel="left">
