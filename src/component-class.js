@@ -111,7 +111,7 @@ class WCFramework7Component {
 
   $detachEvents() {
     const self = this
-    const { $options, $el } = self
+    const { $el } = self
     if (self.$on) {
       Object.keys(self.$on).forEach(eventName => {
         $el.off(Utils.eventNameToColonCase(eventName), self.$on[eventName])
