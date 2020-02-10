@@ -7,7 +7,7 @@
   "author": "Luiz Américo <luizamericop@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
-    "framework7": "^4.4.10"
+    "framework7": "^4.5.1 || ^5.4.1"
   },
   "devDependencies": {
     "@open-wc/prettier-config": "^0.1.10",
