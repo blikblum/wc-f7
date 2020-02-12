@@ -19,7 +19,6 @@ import TouchModule from 'framework7/modules/touch/touch'
 import ClicksModule from 'framework7/modules/clicks/clicks'
 import RouterModule from 'framework7/modules/router/router'
 import HistoryModule from 'framework7/modules/history/history'
-import StorageModule from 'framework7/modules/storage/storage'
 import ComponentModule from 'framework7/modules/component/component'
 import ServiceWorkerModule from 'framework7/modules/service-worker/service-worker'
 
