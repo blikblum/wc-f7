@@ -54,7 +54,6 @@ Framework7.use([
   ClicksModule,
   RouterModule,
   HistoryModule,
-  StorageModule,
   ComponentModule,
   ServiceWorkerModule,
   Statusbar,
