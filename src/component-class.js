@@ -26,10 +26,11 @@ class WCFramework7Component {
     }
 
     self.el = typeof component === 'string' ? document.createElement(component) : new component()
+    const elCtor = self.el.constructor
 
     // setup page attributes
     self.el.classList.add('page')
-    const pageName = self.el.constructor.pageName
+    const pageName = elCtor.pageName || elCtor.name
     if (pageName) {
       self.el.dataset.name = pageName
     }
@@ -66,8 +67,8 @@ class WCFramework7Component {
     })
 
     // Bind Events
-    self.$on = self.el.constructor.$on
-    self.$once = self.el.constructor.$once
+    self.$on = elCtor.$on
+    self.$once = elCtor.$once
     if (self.$on) {
       self.$on = Object.assign({}, self.$on)
       Object.keys(self.$on).forEach(eventName => {
