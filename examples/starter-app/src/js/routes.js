@@ -8,7 +8,7 @@ import '../pages/form-page'
 import '../pages/about-page'
 import '../pages/auto-init-page'
 
-var routes = [
+const routes = [
   {
     path: '/',
     component: HomePage,
@@ -27,7 +27,30 @@ var routes = [
   },
   {
     path: '/dynamic-route/blog/:blogId/post/:postId/',
-    component: DynamicPage,
+    async: function(routeTo, routeFrom, resolve, reject) {
+      resolve(
+        { component: DynamicPage },
+        {
+          hooks: {
+            created() {
+              console.log('async created')
+            },
+            beforeMount() {
+              console.log('async beforeMount')
+            },
+            mounted() {
+              console.log('async mounted')
+            },
+            beforeDestroy() {
+              console.log('async beforeDestroy')
+            },
+            destroyed() {
+              console.log('async destroyed')
+            },
+          },
+        },
+      )
+    },
   },
   {
     path: '/request-and-load/user/:userId/',
