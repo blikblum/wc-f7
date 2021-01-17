@@ -31,8 +31,9 @@ export default {
           aurora: app.theme === 'aurora',
         },
       })
-      const createdComponent = new WCFramework7Component(app, component, {}, extendContext)
-      const el = createdComponent.el
+      const { hooks = {} } = options
+      const f7Component = new WCFramework7Component(app, component, { hooks }, extendContext)
+      const el = f7Component.el
       resolve(el)
 
       if (app.wcPageInitCallbacks) {

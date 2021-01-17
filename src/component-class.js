@@ -18,7 +18,7 @@ class WCFramework7Component {
       // Data
       Utils.extend(self, $options.data())
     }
-    if ($options.render) $options.render = $options.render.bind(self)
+
     if ($options.methods) {
       Object.keys($options.methods).forEach(methodName => {
         self[methodName] = $options.methods[methodName].bind(self)
@@ -84,18 +84,19 @@ class WCFramework7Component {
 
     self.$el = $(self.el)
 
-    self.$attachEvents()
+    self.attachEvents()
 
     // Store component instance
     self.el.f7Component = self
 
     // Created callback
+    self.callHook('created')
     if (self.el.$created) self.el.$created()
 
     return self
   }
 
-  $attachEvents() {
+  attachEvents() {
     const self = this
     const { $el } = self
     if (self.$on) {
@@ -110,7 +111,7 @@ class WCFramework7Component {
     }
   }
 
-  $detachEvents() {
+  detachEvents() {
     const self = this
     const { $el } = self
     if (self.$on) {
@@ -125,19 +126,30 @@ class WCFramework7Component {
     }
   }
 
+  callHook(hookName) {
+    const hook = this.$options.hooks[hookName]
+    if (hook) {
+      hook.call(this, this.el)
+    }
+  }
+
   $mount(mountMethod) {
     const self = this
+    self.callHook('beforeMount')
     if (self.el.$beforeMount) self.el.$beforeMount()
     if (self.$styleEl) $('head').append(self.$styleEl)
     if (mountMethod) mountMethod(self.el)
+    self.callHook('mounted')
     if (self.el.$mounted) self.el.$mounted()
   }
 
   $destroy() {
     const self = this
+    self.callHook('beforeDestroy')
     if (self.el.$beforeDestroy) self.el.$beforeDestroy()
     if (self.$styleEl) $(self.$styleEl).remove()
-    self.$detachEvents()
+    self.detachEvents()
+    self.callHook('destroyed')
     if (self.el.$destroyed) self.el.$destroyed()
     // Delete component instance
     if (self.el && self.el.f7Component) {
