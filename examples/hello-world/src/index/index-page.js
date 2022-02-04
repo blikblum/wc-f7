@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit-element'
+import { LitElement, html } from 'lit'
 
 const pageEvents = {
   pageMounted: function(e, page) {

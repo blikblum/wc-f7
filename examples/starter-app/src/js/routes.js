@@ -1,7 +1,7 @@
 //
-import { HomePage } from '../pages/home-page'
-import { DynamicPage } from '../pages/dynamic-page'
-import { RequestAndLoad } from '../pages/request-and-load-page'
+import { HomePage } from '../pages/home-page.js'
+import { DynamicPage } from '../pages/dynamic-page.js'
+import { RequestAndLoad } from '../pages/request-and-load-page.js'
 
 // use tag name as component
 import '../pages/form-page.js'
