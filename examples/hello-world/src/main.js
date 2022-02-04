@@ -1,6 +1,5 @@
-import 'framework7/css/framework7.css'
-import Framework7 from 'wc-f7'
-import { IndexPage } from './index/index-page'
+import Framework7 from '../../../../bundle.js'
+import { IndexPage } from './index/index-page.js'
 
 const app = new Framework7({
   root: '#app',

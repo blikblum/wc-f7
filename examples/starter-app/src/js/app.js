@@ -1,12 +1,5 @@
 import $$ from 'dom7'
-import Framework7 from 'wc-f7/bundle'
-
-// Import F7 Styles
-import 'framework7/css/framework7.bundle.css'
-
-// Import Icons and App Custom Styles
-import '../css/icons.css'
-import '../css/app.css'
+import Framework7 from '../../../../bundle.js'
 
 // Import Routes
 import routes from './routes.js'

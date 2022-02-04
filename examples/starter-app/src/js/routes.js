@@ -4,9 +4,9 @@ import { DynamicPage } from '../pages/dynamic-page'
 import { RequestAndLoad } from '../pages/request-and-load-page'
 
 // use tag name as component
-import '../pages/form-page'
-import '../pages/about-page'
-import '../pages/auto-init-page'
+import '../pages/form-page.js'
+import '../pages/about-page.js'
+import '../pages/auto-init-page.js'
 
 const routes = [
   {
