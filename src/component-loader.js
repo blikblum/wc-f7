@@ -1,8 +1,6 @@
 import Utils from 'framework7/utils/utils'
 import WCFramework7Component from './component-class'
 
-const resolved = Promise.resolve()
-
 export default {
   name: 'routerComponentLoader',
   proto: {
@@ -35,15 +33,6 @@ export default {
       const f7Component = new WCFramework7Component(app, component, { hooks }, extendContext)
       const el = f7Component.el
       resolve(el)
-
-      if (app.wcPageInitCallbacks) {
-        const renderPromise = el.updateComplete || resolved
-        renderPromise.then(() => {
-          app.wcPageInitCallbacks.forEach(callback => {
-            callback.call(app, el.f7Page)
-          })
-        })
-      }
     },
 
     modalComponentLoader(rootEl, component, componentUrl, options, resolve, reject) {
@@ -52,10 +41,10 @@ export default {
         component,
         componentUrl,
         options,
-        el => {
+        (el) => {
           resolve(el)
         },
-        reject,
+        reject
       )
     },
 
@@ -65,10 +54,10 @@ export default {
         component,
         componentUrl,
         options,
-        el => {
+        (el) => {
           resolve(el)
         },
-        reject,
+        reject
       )
     },
 
@@ -81,7 +70,7 @@ export default {
         (el, newOptions = {}) => {
           resolve(el, newOptions)
         },
-        reject,
+        reject
       )
     },
   },
