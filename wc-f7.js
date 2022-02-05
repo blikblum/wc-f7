@@ -19,8 +19,6 @@ import TouchModule from 'framework7/modules/touch/touch'
 import ClicksModule from 'framework7/modules/clicks/clicks'
 import RouterModule from 'framework7/modules/router/router'
 import HistoryModule from 'framework7/modules/history/history'
-import ComponentModule from 'framework7/modules/component/component'
-import ServiceWorkerModule from 'framework7/modules/service-worker/service-worker'
 
 // Core Components
 import Statusbar from 'framework7/components/statusbar/statusbar'
@@ -54,8 +52,6 @@ Framework7.use([
   ClicksModule,
   RouterModule,
   HistoryModule,
-  ComponentModule,
-  ServiceWorkerModule,
   Statusbar,
   View,
   Navbar,
