@@ -1,16 +1,48 @@
 import { findContext } from './routecontext.js'
 
-const getPath = (object, path, value) => {
-  // Check if path is string or array. Regex : ensure that we do not have '.' and brackets
-  const pathArray = Array.isArray(path) ? path : path.split(/[,[\].]/g).filter(Boolean)
-  // Find value if exist return otherwise return undefined value;
-  return pathArray.reduce((prevObj, key) => prevObj && prevObj[key], object) || value
-}
-
 const parseNumber = (value) => {
   const n = parseFloat(value)
   const isNumeric = value == n // eslint-disable-line eqeqeq
   return isNumeric ? n : value
+}
+
+const bindEvents = (route, el, events) => {
+  if (events) {
+    for (const [eventName, listener] of Object.entries(events)) {
+      el.addEventListener(eventName, listener.bind(route))
+    }
+  }
+}
+
+export function fromQuery(queryKey) {
+  return {
+    enter(transition, setValue) {
+      setValue(transition.to.query[queryKey])
+    },
+  }
+}
+
+export function fromParam(paramKey) {
+  return {
+    enter(transition, setValue) {
+      setValue(transition.to.params[paramKey])
+    },
+  }
+}
+
+export function toHost(property, format) {
+  return {
+    update(value, el) {
+      if (!el) return
+      let v = value
+      if (format === 'number') {
+        v = parseNumber(value)
+      } else if (typeof format === 'function') {
+        v = format(value)
+      }
+      el[property] = v
+    },
+  }
 }
 
 const createElement = (route, Definition) => {
@@ -51,13 +83,47 @@ export class RouteController {
     this.$path = path
     this.$options = options
     this.initialize(controllerOptions)
+    this._properties = []
+    const classProperties = this.constructor.properties
+    if (classProperties) {
+      for (const [name, value] of Object.entries(classProperties)) {
+        const hooks = [value.to, value.from].filter(Boolean)
+        const set = (v) => {
+          this[name] = v
+          const host = this.host
+          hooks.forEach((hook) => {
+            if (typeof hook.update === 'function') {
+              hook.update(v, host)
+            }
+          })
+        }
+        const property = { name, hooks, set }
+        this._properties.push(property)
+      }
+    }
   }
 
   initialize() {}
 
-  activate() {}
+  activate(transition) {
+    this._properties.forEach(({ hooks, set }) => {
+      hooks.forEach((hook) => {
+        if (typeof hook.enter === 'function') {
+          hook.enter(transition, set)
+        }
+      })
+    })
+  }
 
-  deactivate() {}
+  deactivate(transition) {
+    this._properties.forEach(({ hooks, set }) => {
+      hooks.forEach((hook) => {
+        if (typeof hook.leave === 'function') {
+          hook.leave(transition, set)
+        }
+      })
+    })
+  }
 
   updateEl() {}
 
@@ -67,23 +133,14 @@ export class RouteController {
     el.$route = $route
     const { properties } = this.$options
     if (properties) Object.assign(el, properties)
-    const classProperties = this.constructor.__properties
-    if (classProperties) {
-      classProperties.forEach(({ name, from, to, format }) => {
-        if (from) {
-          let result = getPath(transition, from)
-          if (format === 'number') {
-            result = parseNumber(result)
-          } else if (typeof format === 'function') {
-            result = format(result)
-          }
-          this[name] = result
-        }
-        if (to && !this.el) {
-          el[to] = this[name]
+    this._properties.forEach(({ hooks, name }) => {
+      const value = this[name]
+      hooks.forEach((hook) => {
+        if (typeof hook.update === 'function') {
+          hook.update(value, el)
         }
       })
-    }
+    })
   }
 
   _prepareEl(el, transition, $route) {
@@ -92,6 +149,7 @@ export class RouteController {
   }
 
   _connectEl(el, transition, $route) {
+    bindEvents(this, el, this.constructor.events)
     this._prepareEl(el, transition, $route)
     this.host = el
     el.addController(this)

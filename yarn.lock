@@ -2030,6 +2030,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nanostores@npm:^0.5.10":
+  version: 0.5.10
+  resolution: "nanostores@npm:0.5.10"
+  checksum: ee47d67064b4bec2044c1767deec66f3cd7c449f5f74c7425c87b78403b9f26bb5af6c3575fa2bba9d8f62f7a6318298c029f3a3ee095c11c4ebb6577d6881c5
+  languageName: node
+  linkType: hard
+
 "negotiator@npm:0.6.3, negotiator@npm:^0.6.2":
   version: 0.6.3
   resolution: "negotiator@npm:0.6.3"
@@ -3179,6 +3186,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"wc-context@npm:^0.10.0":
+  version: 0.10.0
+  resolution: "wc-context@npm:0.10.0"
+  checksum: 5484faf357cbdfb91639849b126e4d62789da444933e942ddda6fb3f93c59500c246ee8a54f2aa4586f2cc0b8940b0796c85b690002b509685167d34139ee29c
+  languageName: node
+  linkType: hard
+
 "wc-f7@workspace:.":
   version: 0.0.0-use.local
   resolution: "wc-f7@workspace:."
@@ -3187,8 +3201,10 @@ __metadata:
     dom7: 2.1.3
     framework7: 5.4.1
     lit: ^2.1.2
+    nanostores: ^0.5.10
     postcss: ^8.4.6
     rollup-plugin-postcss: ^4.0.2
+    wc-context: ^0.10.0
   peerDependencies:
     framework7: ^5.4.1
   languageName: unknown
