@@ -1,7 +1,7 @@
-import { RouteController } from '../../extrouter.js'
-import { toHost } from '../../src/extrouter/route.js'
-import { catFact, updateCatFact } from './state/catfact.js'
-import { fromStore } from './state/routeHook.js'
+import { RouteController } from '../../../extrouter.js'
+import { toHost } from '../../../src/extrouter/route.js'
+import { catFact, updateCatFact } from '../state/catfact.js'
+import { fromStore } from '../state/routeHook.js'
 
 import './catfact-page.js'
 

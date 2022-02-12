@@ -1,9 +1,8 @@
-import { routeMap, viewRoutesMap } from './globals.js'
+import { setRouteData } from './utils.js'
 import { getComponent } from './route.js'
 
 function resolveComponent(router, routeConfig, to, from, resolve, reject) {
   const { controller: RouteClass, component } = routeConfig
-  let viewRoutes
   const transition = {
     to,
     from,
@@ -30,7 +29,7 @@ function resolveComponent(router, routeConfig, to, from, resolve, reject) {
       }
     },
   }
-  const currentRoute = new RouteClass(routeConfig.classOptions || {}, router, to, routeConfig)
+  const currentRoute = new RouteClass(router, to, routeConfig)
   if (component) {
     currentRoute.component = component
   }
@@ -52,13 +51,7 @@ function resolveComponent(router, routeConfig, to, from, resolve, reject) {
           reject()
           return
         }
-        routeMap.set(to, currentRoute)
-        viewRoutes = viewRoutesMap.get(router)
-        if (!viewRoutes) {
-          viewRoutes = []
-          viewRoutesMap.set(router, viewRoutes)
-        }
-        viewRoutes.push(currentRoute)
+        setRouteData(to, { controller: currentRoute, from })
         resolve(
           { component: getComponent(currentRoute) },
           {

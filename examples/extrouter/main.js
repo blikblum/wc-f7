@@ -1,8 +1,8 @@
 import Framework7 from '../../../../bundle.js'
 import { mapRoutes } from '../../extrouter.js'
-import { HomePage } from './home-page.js'
-import { CatFactRoute } from './CatFactRoute.js'
-import { PersonRoute } from './PersonRoute.js'
+import { HomePage } from './pages/home-page.js'
+import { CatFactRoute } from './pages/CatFactRoute.js'
+import { PersonRoute } from './pages/PersonRoute.js'
 
 const app = new Framework7({
   root: '#app',
@@ -24,5 +24,6 @@ const app = new Framework7({
 
 app.views.create('.view-main', {
   stackPages: true,
+  preloadPreviousPage: false,
   url: '/home-page/',
 })

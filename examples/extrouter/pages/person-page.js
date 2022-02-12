@@ -30,6 +30,15 @@ export class PersonPage extends LitElement {
           <div>Role: ${this.personRole || '--'}</div>
           <div>Age: ${this.personAge || '--'}</div>
         </div>
+
+        <div class="block-title">Other pages</div>
+        <div class="list links-list">
+          <ul>
+            <li>
+              <a href="/catfact-page/">Cat Fact</a>
+            </li>
+          </ul>
+        </div>
       </div>
     `
   }

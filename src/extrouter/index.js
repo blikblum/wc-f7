@@ -1,5 +1,5 @@
 import asyncRoute from './asyncroute.js'
-import { routeMap } from './globals.js'
+import { clearRouteData, getRouteData, isSameRoute } from './utils.js'
 
 function beforeLeaveHandler(to, from, resolve, reject) {
   const router = this
@@ -29,17 +29,23 @@ function beforeLeaveHandler(to, from, resolve, reject) {
       }
     },
   }
-  const previousRoute = routeMap.get(from)
-  if (previousRoute) {
+
+  const fromData = getRouteData(from)
+  // with v5 there's no way to know if is going backward or forward
+  // for now activate and deactivate regardless of active or not
+  if (fromData /* && isSameRoute(fromData.from, to) */) {
     if (!transition.isCancelled) {
-      previousRoute.deactivate(transition)
+      fromData.controller.deactivate(transition)
     }
     if (transition.isCancelled) {
       transition.hidePreloader()
       reject()
       return
     }
+    fromData.controller.destroy()
+    clearRouteData(from)
   }
+
   resolve()
 }
 

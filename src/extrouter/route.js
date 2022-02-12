@@ -77,12 +77,12 @@ const contextProxyHandler = {
 }
 
 export class RouteController {
-  constructor(controllerOptions, router, { name, path }, options) {
+  constructor(router, { name, path }, options) {
     this.$router = router
     this.$name = name
     this.$path = path
     this.$options = options
-    this.initialize(controllerOptions)
+    this.initialize()
     this._properties = []
     const classProperties = this.constructor.properties
     if (classProperties) {
@@ -125,14 +125,10 @@ export class RouteController {
     })
   }
 
-  updateEl() {}
-
   prepareEl(el, transition) {}
 
   _applyProperties(el, transition, $route) {
     el.$route = $route
-    const { properties } = this.$options
-    if (properties) Object.assign(el, properties)
     this._properties.forEach(({ hooks, name }) => {
       const value = this[name]
       hooks.forEach((hook) => {

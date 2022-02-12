@@ -1050,12 +1050,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dom7@npm:2.1.3, dom7@npm:^2.1.3":
-  version: 2.1.3
-  resolution: "dom7@npm:2.1.3"
+"dom7@npm:2.1.5, dom7@npm:^2.1.5":
+  version: 2.1.5
+  resolution: "dom7@npm:2.1.5"
   dependencies:
-    ssr-window: ^1.0.1
-  checksum: 03c78865bafeb9dca1b44f7d7ba535bb2cdf184a1eb06a5d3ace15c4ee8b61a9beff5e1c713db1c7b052c9c483b892e074c08aad45773118f2d491c472ccbf48
+    ssr-window: ^2.0.0
+  checksum: 7615d2d2deb269149595c0e43cf0608fe9b464580cb205a6c003578b9b417611940f40347712c1fcbd2a7e35adbaf3c07ea1a3273d426865fe42ef42e11fdd8d
   languageName: node
   linkType: hard
 
@@ -1218,15 +1218,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framework7@npm:5.4.1":
-  version: 5.4.1
-  resolution: "framework7@npm:5.4.1"
+"framework7@npm:5.7.14":
+  version: 5.7.14
+  resolution: "framework7@npm:5.7.14"
   dependencies:
-    dom7: ^2.1.3
+    dom7: ^2.1.5
     path-to-regexp: ^6.1.0
-    ssr-window: ^1.0.1
+    ssr-window: ^2.0.0
     template7: ^1.4.2
-  checksum: fbda18ec1e2c851d83df1375bf35b36584396942cc3a4bee611fac586deb77799f28877862cf52ae7988bca006a6ce48224d25f7207acf3eb8f6ca2febcb0873
+  checksum: f49ce9758c879bc6fdc93c778b3ec20fa18fcef7de45cd289435251416ae5f291d067859ecdcfc42b11a064cbe8c1fa18c1860dabf339b52a877619d07036d0f
   languageName: node
   linkType: hard
 
@@ -2931,10 +2931,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ssr-window@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "ssr-window@npm:1.0.1"
-  checksum: 37d90d068978769a7e8b3b547938b94b42cb3fe8d47603f908f27b54789aaf9140b71e2dd81876597b4386543217b71748fcb06d1fcb562490a3d850b6f349d2
+"ssr-window@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "ssr-window@npm:2.0.0"
+  checksum: 9f076def70f0c0e369f00df94a627829b58c225dd6574de1fba99f9c3a9dd8858e2efcfbe4913b7a7ad77f805d40cbddeee7c1e507ad5324a6ea5d70b57ae675
   languageName: node
   linkType: hard
 
@@ -3198,8 +3198,8 @@ __metadata:
   resolution: "wc-f7@workspace:."
   dependencies:
     "@web/dev-server": ^0.1.29
-    dom7: 2.1.3
-    framework7: 5.4.1
+    dom7: 2.1.5
+    framework7: 5.7.14
     lit: ^2.1.2
     nanostores: ^0.5.10
     postcss: ^8.4.6
