@@ -76,6 +76,51 @@ const contextProxyHandler = {
   },
 }
 
+// ensure no prototype properties exists
+const methodHooks = Object.create(null, {
+  activate: {
+    value: function activate(transition) {
+      console.log('activateHook', this)
+      this._properties.forEach(({ hooks, set }) => {
+        hooks.forEach((hook) => {
+          if (typeof hook.enter === 'function') {
+            hook.enter(transition, set)
+          }
+        })
+      })
+    },
+  },
+
+  deactivate: {
+    value: function deactivate(transition) {
+      console.log('deactivateHook', this)
+      this._properties.forEach(({ hooks, set }) => {
+        hooks.forEach((hook) => {
+          if (typeof hook.leave === 'function') {
+            hook.leave(transition, set)
+          }
+        })
+      })
+    },
+  },
+})
+
+const controllerProxyHandler = {
+  get(target, propertyKey, receiver) {
+    const methodHook = methodHooks[propertyKey]
+    if (methodHook) {
+      const origMethod = target[propertyKey]
+      return function (...args) {
+        methodHook.apply(this, args)
+        if (typeof origMethod === 'function') {
+          origMethod.apply(this, args)
+        }
+      }
+    }
+    return Reflect.get(target, propertyKey, receiver)
+  },
+}
+
 export class RouteController {
   constructor(router, { name, path }, options) {
     this.$router = router
@@ -101,29 +146,14 @@ export class RouteController {
         this._properties.push(property)
       }
     }
+    return new Proxy(this, controllerProxyHandler)
   }
 
   initialize() {}
 
-  activate(transition) {
-    this._properties.forEach(({ hooks, set }) => {
-      hooks.forEach((hook) => {
-        if (typeof hook.enter === 'function') {
-          hook.enter(transition, set)
-        }
-      })
-    })
-  }
+  activate(transition) {}
 
-  deactivate(transition) {
-    this._properties.forEach(({ hooks, set }) => {
-      hooks.forEach((hook) => {
-        if (typeof hook.leave === 'function') {
-          hook.leave(transition, set)
-        }
-      })
-    })
-  }
+  deactivate(transition) {}
 
   prepareEl(el, transition) {}
 

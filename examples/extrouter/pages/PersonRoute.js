@@ -11,13 +11,11 @@ export class PersonRoute extends RouteController {
     personRole: { from: fromQuery('role'), to: toHost('personRole') },
   }
 
-  activate(transition) {
-    super.activate(transition)
-    console.log('person activated', this.personId)
+  activate() {
+    console.log(`person ${this.personId} activated`)
   }
 
-  deactivate(transition) {
-    super.deactivate(transition)
-    console.log('person deactivated', this.personId)
+  deactivate() {
+    console.log(`person ${this.personId} deactivated`)
   }
 }
