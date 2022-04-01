@@ -19,6 +19,12 @@
     "rollup-plugin-postcss": "^4.0.2",
     "wc-context": "^0.10.0"
   },
+  "files": [
+    "wc-f7.js",
+    "bundle.js",
+    "router.js",
+    "src"
+  ],
   "packageManager": "yarn@3.1.1",
   "scripts": {
     "start": "web-dev-server --node-resolve --open examples/"

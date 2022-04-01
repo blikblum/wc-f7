@@ -1,5 +1,5 @@
 import Framework7 from '../../../../bundle.js'
-import { mapRoutes } from '../../extrouter.js'
+import { mapRoutes } from '../../router.js'
 import { HomePage } from './pages/home-page.js'
 import { CatFactRoute } from './pages/CatFactRoute.js'
 import { PersonRoute } from './pages/PersonRoute.js'

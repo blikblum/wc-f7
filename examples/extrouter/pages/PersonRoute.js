@@ -1,4 +1,4 @@
-import { RouteController } from '../../../extrouter.js'
+import { RouteController } from '../../../router.js'
 import { fromParam, fromQuery, toHost } from '../../../src/extrouter/route.js'
 import './person-page.js'
 
