@@ -1,6 +1,6 @@
 {
   "name": "wc-f7",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Framework7 Web Component adapter",
   "main": "wc-f7.js",
   "repository": "https://github.com/blikblum/wc-f7.git",
