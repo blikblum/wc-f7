@@ -14,18 +14,28 @@ const bindEvents = (route, el, events) => {
   }
 }
 
-export function fromQuery(queryKey) {
+function getFormattedValue(value, format) {
+  let v = value
+  if (format === 'number') {
+    v = parseNumber(value)
+  } else if (typeof format === 'function') {
+    v = format(value)
+  }
+  return v
+}
+
+export function fromQuery(queryKey, format) {
   return {
     enter(transition, setValue) {
-      setValue(transition.to.query[queryKey])
+      setValue(getFormattedValue(transition.to.query[queryKey], format))
     },
   }
 }
 
-export function fromParam(paramKey) {
+export function fromParam(paramKey, format) {
   return {
     enter(transition, setValue) {
-      setValue(transition.to.params[paramKey])
+      setValue(getFormattedValue(transition.to.params[paramKey], format))
     },
   }
 }
@@ -34,13 +44,7 @@ export function toHost(property, format) {
   return {
     update(value, el) {
       if (!el) return
-      let v = value
-      if (format === 'number') {
-        v = parseNumber(value)
-      } else if (typeof format === 'function') {
-        v = format(value)
-      }
-      el[property] = v
+      el[property] = getFormattedValue(value, format)
     },
   }
 }
@@ -80,7 +84,6 @@ const contextProxyHandler = {
 const methodHooks = Object.create(null, {
   activate: {
     value: function activate(transition) {
-      console.log('activateHook', this)
       this._properties.forEach(({ hooks, set }) => {
         hooks.forEach((hook) => {
           if (typeof hook.enter === 'function') {
@@ -93,7 +96,6 @@ const methodHooks = Object.create(null, {
 
   deactivate: {
     value: function deactivate(transition) {
-      console.log('deactivateHook', this)
       this._properties.forEach(({ hooks, set }) => {
         hooks.forEach((hook) => {
           if (typeof hook.leave === 'function') {
