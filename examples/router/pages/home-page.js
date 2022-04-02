@@ -10,7 +10,7 @@ export class HomePage extends LitElement {
       <div class="navbar">
         <div class="navbar-bg"></div>
         <div class="navbar-inner">
-          <div class="title">Ext Router Demo</div>
+          <div class="title">WC-F7 Router Demo</div>
         </div>
       </div>
       <div class="page-content">

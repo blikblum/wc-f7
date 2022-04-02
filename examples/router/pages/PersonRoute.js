@@ -1,5 +1,5 @@
 import { RouteController } from '../../../router.js'
-import { fromParam, fromQuery, toHost } from '../../../src/extrouter/route.js'
+import { fromParam, fromQuery, toHost } from '../../../src/router/route.js'
 import './person-page.js'
 
 export class PersonRoute extends RouteController {

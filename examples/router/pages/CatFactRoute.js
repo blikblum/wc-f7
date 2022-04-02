@@ -1,5 +1,5 @@
 import { RouteController } from '../../../router.js'
-import { toHost } from '../../../src/extrouter/route.js'
+import { toHost } from '../../../src/router/route.js'
 import { catFact, updateCatFact } from '../state/catfact.js'
 import { fromStore } from '../state/routeHook.js'
 
