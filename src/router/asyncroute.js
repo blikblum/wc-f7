@@ -64,10 +64,11 @@ function resolveComponent(router, routeConfig, to, from, resolve, reject) {
         )
       }
     })
-    .catch(function (err) {
+    .catch(function (error) {
       transition.hidePreloader()
       currentRoute.destroy()
       reject()
+      throw error
     })
 }
 
