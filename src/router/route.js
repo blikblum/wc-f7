@@ -134,7 +134,7 @@ export class RouteController {
     const classProperties = this.constructor.properties
     if (classProperties) {
       for (const [name, value] of Object.entries(classProperties)) {
-        const hooks = [value.to, value.from].filter(Boolean)
+        const hooks = [value.to, value.from].filter(Boolean).flat()
         const set = (v) => {
           this[name] = v
           const host = this.host
@@ -144,6 +144,11 @@ export class RouteController {
             }
           })
         }
+        hooks.forEach((hook) => {
+          if (typeof hook.init === 'function') {
+            hook.init(set)
+          }
+        })
         const property = { name, hooks, set }
         this._properties.push(property)
       }
