@@ -7,8 +7,8 @@ export class PersonRoute extends RouteController {
 
   static properties = {
     personId: { from: fromParam('id'), to: toHost('personId') },
-    personAge: { from: fromQuery('age'), to: toHost('personAge', 'number') },
-    personAge2: { from: fromQuery('age', 'number'), to: toHost('personAge') },
+    personAge: { from: fromQuery('age'), to: [toHost('personAge', 'number')] },
+    personAge2: { from: fromQuery('age', 'number') },
     personRole: { from: fromQuery('role'), to: toHost('personRole') },
   }
 

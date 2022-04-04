@@ -27,7 +27,7 @@ function getFormattedValue(value, format) {
 export function fromQuery(queryKey, format) {
   return {
     enter(transition, setValue) {
-      setValue(getFormattedValue(transition.to.query[queryKey], format))
+      setValue(transition.to.query[queryKey], format)
     },
   }
 }
@@ -35,7 +35,7 @@ export function fromQuery(queryKey, format) {
 export function fromParam(paramKey, format) {
   return {
     enter(transition, setValue) {
-      setValue(getFormattedValue(transition.to.params[paramKey], format))
+      setValue(transition.to.params[paramKey], format)
     },
   }
 }
@@ -135,12 +135,15 @@ export class RouteController {
     if (classProperties) {
       for (const [name, value] of Object.entries(classProperties)) {
         const hooks = [value.to, value.from].filter(Boolean).flat()
-        const set = (v) => {
-          this[name] = v
+        const set = (v, format) => {
+          const oldValue = this[name]
+          const newValue = getFormattedValue(v, format)
+          if (oldValue === newValue) return
+          this[name] = newValue
           const host = this.host
           hooks.forEach((hook) => {
             if (typeof hook.update === 'function') {
-              hook.update(v, host)
+              hook.update(newValue, host)
             }
           })
         }
